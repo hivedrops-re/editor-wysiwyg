@@ -15,7 +15,7 @@ class EditorServiceProvider extends ServiceProvider
 
         // Publier la configuration
         $this->publishes([
-            __DIR__.'/config/editor.php' => config_path('editor.php'),
+            __DIR__.'/../config/editor.php' => config_path('editor.php'),
         ], 'editor-config');
 
         // Publier les assets
@@ -30,6 +30,6 @@ class EditorServiceProvider extends ServiceProvider
 
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__.'/config/editor.php', 'editor');
+        $this->mergeConfigFrom(__DIR__.'/../config/editor.php', 'editor');
     }
 }
