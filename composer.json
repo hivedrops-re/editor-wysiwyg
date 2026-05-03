@@ -3,6 +3,11 @@
     "description": "Editeur wysiwyg pour mes projet laravel spécifique",
     "type": "library",
     "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Hivedrops\\Editor\\": "src/"
+        }
+    },
     "require": {
         "php": "^8.1",
         "laravel/framework": "^10.0|^11.0|^12.0",
