@@ -1,0 +1,117 @@
+.wysiwyg-wrapper {
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-family: sans-serif;
+    overflow: hidden;
+}
+
+.wysiwyg-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 8px;
+    background: #f1f5f9;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.toolbar-group {
+    display: flex;
+    gap: 4px;
+    border-right: 1px solid #e2e8f0;
+    padding-right: 8px;
+    margin-right: 8px;
+}
+
+.toolbar-group:last-child {
+    border-right: none;
+}
+
+.wysiwyg-toolbar button {
+    background: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    padding: 4px 8px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.wysiwyg-toolbar button:hover {
+    background-color: #e2e8f0;
+    border-color: #ccc;
+}
+
+.wysiwyg-toolbar button.active {
+    background-color: #e0e0e0;
+    border-color: #aaa;
+}
+
+.wysiwyg-editor {
+    padding: 12px;
+    min-height: 200px;
+    outline: none;
+    line-height: 1.5;
+}
+
+.wysiwyg-editor:empty:before {
+    content: attr(data-placeholder);
+    color: #aaa;
+}
+
+.wysiwyg-editor ul, .wysiwyg-editor ol {
+    margin: 0 0 0 20px;
+    padding: 0;
+}
+.wysiwyg-editor ul {
+    list-style: disc;
+}
+.wysiwyg-editor ol {
+    list-style: decimal;
+}
+
+.wysiwyg-editor img {
+    max-width: 100%;
+    height: auto;
+}
+
+.wysiwyg-toolbar select {
+    padding: 4px 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: white;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.wysiwyg-editor h1 {
+    font-size: 2em;
+    font-weight: bold;
+    margin: 0.67em 0;
+}
+
+.wysiwyg-editor h2 {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin: 0.83em 0;
+}
+
+.wysiwyg-editor h3 {
+    font-size: 1.17em;
+    font-weight: bold;
+    margin: 1em 0;
+}
+
+.wysiwyg-editor p {
+    margin: 1em 0;
+    line-height: 1.5;
+}
+
+.wysiwyg-editor pre {
+    background-color: #f4f4f4;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+    font-family: monospace;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
