@@ -30,10 +30,10 @@ class Editor extends Component
     )
     {
         $this->content = $content;
-        $this->toolbar = $toolbar ?? config('wysiwyg.toolbar');
-        $this->height = $height ?? config('wysiwyg.height');
-        $this->placeholder = $placeholder ?? config('wysiwyg.placeholder');
-        $this->formatOptions = $formatOptions ?? config('wysiwyg.format_options', [
+        $this->toolbar = $toolbar ?? config('editor.toolbar');
+        $this->height = $height ?? config('editor.height');
+        $this->placeholder = $placeholder ?? config('editor.placeholder');
+        $this->formatOptions = $formatOptions ?? config('editor.format_options', [
             ['value' => 'p', 'label' => 'Paragraphe'],
             ['value' => 'h1', 'label' => 'Titre 1'],
             ['value' => 'h2', 'label' => 'Titre 2'],
