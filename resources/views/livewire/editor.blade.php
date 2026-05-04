@@ -4,7 +4,10 @@
         toolbar: {{ json_encode($toolbar) }},
         height: '{{ $height }}',
         placeholder: '{{ $placeholder }}',
-        formatOptions: {{ json_encode($formatOptions) }}
+        formatOptions: {{ json_encode($formatOptions) }},
+        colors: [
+            '#000000', '#FFFFFF'
+        ]
     })"
         x-init="init()"
         wire:ignore
@@ -57,6 +60,25 @@
                     </div>
                 </div>
             @endif
+            <div class="toolbar-group" x-data="{ open: false }" style="position: relative;">
+
+                <button type="button" @click="open = !open" title="Couleur du texte">
+                    <i class="fa-regular fa-palette"></i>
+                </button>
+
+                <div x-show="open" @click.outside="open = false"
+                     style="position: absolute; top: 100%; left: 0; background: white; border: 1px solid #ccc; padding: 5px; display: grid; grid-template-columns: repeat(6, 20px); gap: 5px;">
+
+                    <template x-for="color in colors" :key="color">
+                        <div
+                                :style="'background:' + color"
+                                @click="setColor(color); open = false"
+                                style="width: 20px; height: 20px; cursor: pointer; border: 1px solid #ddd;"
+                        ></div>
+                    </template>
+
+                </div>
+            </div>
             <!-- Boutons dynamiques -->
             <template x-for="group in toolbar">
                 <div class="toolbar-group">
@@ -97,6 +119,11 @@
                 formatOptions: config.formatOptions,   // récupération des options de format
                 selectedFormat: 'p',                    // valeur par défaut
                 editor: null,
+                colors: config.colors ?? [
+                    '#000000', '#444444', '#666666', '#999999',
+                    '#ff0000', '#ff9900', '#ffff00', '#00ff00',
+                    '#00ffff', '#0000ff', '#9900ff', '#ff00ff'
+                ],
 
                 init() {
                     this.editor = this.$refs.editor;

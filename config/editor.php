@@ -3,6 +3,7 @@
 return [
     'toolbar' => [
         ['bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript'],
+        ['textColor'],
         ['unorderedList', 'orderedList', 'outdent', 'indent'],
         ['link', 'unlink'],
         ['image']
