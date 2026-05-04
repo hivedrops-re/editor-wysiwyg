@@ -86,9 +86,12 @@
                      "
                 >
                     <template x-for="color in colors" :key="color">
-                        <div :style="'background:' + color" @click="setColor(color); open = false" style="
-                                    width: 100%;
-                                    aspect-ratio: 1;
+                        <div
+                                :style="'background:' + color"
+                                @click="setColor(color); open = false"
+                                style="
+                                    width: 20px;
+                                    height: 20px;
                                     cursor: pointer;
                                     border: 1px solid #ddd;
                                 "
