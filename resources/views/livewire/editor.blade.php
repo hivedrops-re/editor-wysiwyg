@@ -5,11 +5,11 @@
         height: '{{ $height }}',
         placeholder: '{{ $placeholder }}',
         formatOptions: {{ json_encode($formatOptions) }},
-        colors: [
+        colors: @js([
             '#000000', '#444444', '#666666', '#999999',
             '#ff0000', '#ff9900', '#ffff00', '#00ff00',
             '#00ffff', '#0000ff', '#9900ff', '#ff00ff'
-        ]
+        ])
     })"
         x-init="init()"
         wire:ignore
@@ -54,7 +54,8 @@
                         "
                     >
                         @foreach($options as $option)
-                            <button type="button" @click="insertTag('{{ $option['value'] }}');open = false;" class="inline-flex items-center w-full justify-between">
+                            <button type="button" @click="insertTag('{{ $option['value'] }}');open = false;"
+                                    class="inline-flex items-center w-full justify-between">
                                 <span class="text-xs text-left">{{ $option['label'] }}</span>
                                 <span class="text-blue-600 text-sm">{{ $option['value'] }}</span>
                             </button>
@@ -62,43 +63,51 @@
                     </div>
                 </div>
             @endif
+
+            <!-- Couleurs -->
             <div class="toolbar-group" x-data="{ open: false }" style="position: relative;">
 
                 <button type="button" @click="open = !open" title="Couleur du texte">
                     <i class="fa-regular fa-palette"></i>
                 </button>
 
-                <div x-show="open"
-                     x-transition
-                     @click.outside="open = false"
-                     style="
-                        position: absolute;
-                        top: 100%;
-                        left: 0;
-                        width: 150px;
-                        background: white;
-                        border: 1px solid #ccc;
-                        padding: 8px;
-                        display: grid;
-                        grid-template-columns: repeat(6, 1fr);
-                        gap: 6px;
-                        z-index: 9999;
-                     "
+                <div
+                        x-show="open"
+                        x-transition
+                        @click.outside="open = false"
+                        class="color-dropdown"
+                        style="
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 150px;
+            background: white;
+            border: 1px solid #ccc;
+            padding: 8px;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 6px;
+            z-index: 9999;
+        "
                 >
                     <template x-for="color in colors" :key="color">
-                        <div
-                                :style="'background:' + color"
+                        <button
+                                type="button"
+                                :style="'background-color:' + color"
                                 @click="setColor(color); open = false"
                                 style="
-                                    width: 20px;
-                                    height: 20px;
-                                    cursor: pointer;
-                                    border: 1px solid #ddd;
-                                "
-                        ></div>
+                    width: 20px;
+                    height: 20px;
+                    cursor: pointer;
+                    border: 1px solid #ddd;
+                "
+                        ></button>
                     </template>
                 </div>
+
             </div>
+
+            <!-- Fin de couleur -->
+
             <!-- Boutons dynamiques -->
             <template x-for="group in toolbar">
                 <div class="toolbar-group">
@@ -139,11 +148,7 @@
                 formatOptions: config.formatOptions,   // récupération des options de format
                 selectedFormat: 'p',                    // valeur par défaut
                 editor: null,
-                colors: config.colors ?? [
-                    '#000000', '#444444', '#666666', '#999999',
-                    '#ff0000', '#ff9900', '#ffff00', '#00ff00',
-                    '#00ffff', '#0000ff', '#9900ff', '#ff00ff'
-                ],
+                colors: config.colors || [],
 
                 init() {
                     this.editor = this.$refs.editor;
@@ -180,7 +185,7 @@
                 },
 
                 executeCommand(command) {
-                    switch(command) {
+                    switch (command) {
                         case 'bold':
                             document.execCommand('bold', false, null);
                             break;
@@ -311,10 +316,16 @@
                     this.updateContent();
                 },
 
+                setColor(color) {
+                    this.editor.focus();
+                    document.execCommand('foreColor', false, color);
+                    this.updateContent();
+                },
+
 
                 handleKeydown(e) {
                     if (e.ctrlKey || e.metaKey) {
-                        switch(e.key) {
+                        switch (e.key) {
                             case 'b':
                                 e.preventDefault();
                                 this.executeCommand('bold');

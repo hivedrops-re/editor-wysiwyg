@@ -40,6 +40,10 @@
     border-color: #ccc;
 }
 
+.color-dropdown {
+    display: grid;
+}
+
 .wysiwyg-toolbar button.active {
     background-color: #e0e0e0;
     border-color: #aaa;
